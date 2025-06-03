@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Booking System</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Hotel Booking & Reservation System</h1>
+      <nav>
+        <button onclick="showSection('rooms')" class="nav-btn active">
+          Available Rooms
+        </button>
+        <button onclick="showSection('add-room')" class="nav-btn">
+          Add Room
+        </button>
+        <button onclick="showSection('booking')" class="nav-btn">
+          Make Booking
+        </button>
+        <button onclick="showSection('bookings')" class="nav-btn">
+          View Bookings
+        </button>
+        <button onclick="showSection('system-status')" class="nav-btn">
+          System Status
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Available Rooms Section -->
+      <section id="rooms" class="section active">
+        <h2>Available Rooms</h2>
+        <div id="rooms-grid" class="rooms-grid"></div>
+      </section>
+
+      <!-- Add Room Section -->
+      <section id="add-room" class="section">
+        <h2>Add New Room</h2>
+        <div class="add-room-container">
+          <form id="add-room-form" class="form-section">
+            <h3>Room Details</h3>
+            <input
+              type="text"
+              name="room_number"
+              placeholder="Room Number (e.g., 101)"
+              required
+            />
+            <select name="room_type" required>
+              <option value="">Select Room Type</option>
+              <option value="single">Single</option>
+              <option value="double">Double</option>
+              <option value="suite">Suite</option>
+              <option value="deluxe">Deluxe</option>
+            </select>
+            <input
+              type="number"
+              name="price_per_night"
+              placeholder="Price per Night"
+              step="0.01"
+              min="0"
+              required
+            />
+            <input
+              type="number"
+              name="capacity"
+              placeholder="Room Capacity"
+              min="1"
+              required
+            />
+            <textarea
+              name="amenities"
+              placeholder="Room Amenities (e.g., WiFi, TV, AC)"
+              rows="3"
+              required
+            ></textarea>
+            <button type="submit" class="btn-primary">Add Room</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Booking Form Section -->
+      <section id="booking" class="section">
+        <h2>Make a Reservation</h2>
+        <div class="booking-container">
+          <form id="customer-form" class="form-section">
+            <h3>Customer Information</h3>
+            <input
+              type="text"
+              name="first_name"
+              placeholder="First Name"
+              required
+            />
+            <input
+              type="text"
+              name="last_name"
+              placeholder="Last Name"
+              required
+            />
+            <input type="email" name="email" placeholder="Email" required />
+            <input type="tel" name="phone" placeholder="Phone Number" />
+            <textarea name="address" placeholder="Address" rows="3"></textarea>
+          </form>
+
+          <form id="booking-form" class="form-section">
+            <h3>Booking Details</h3>
+            <select name="room_id" required>
+              <option value="">Select Room</option>
+            </select>
+            <input type="date" name="check_in_date" required />
+            <input type="date" name="check_out_date" required />
+            <textarea
+              name="special_requests"
+              placeholder="Special Requests"
+              rows="3"
+            ></textarea>
+            <button type="submit" class="btn-primary">Book Now</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Bookings List Section -->
+      <section id="bookings" class="section">
+        <h2>Current Bookings</h2>
+        <div id="bookings-list" class="bookings-list"></div>
+      </section>
+
+      <!-- System Status Section -->
+      <section id="system-status" class="section">
+        <h2>System Status & Statistics</h2>
+        <div class="status-container">
+          <div class="status-grid">
+            <div class="status-card" id="api-status">
+              <h3>API Status</h3>
+              <div class="status-indicator" id="api-indicator">Checking...</div>
+              <p id="api-details">Loading...</p>
+            </div>
+
+            <div class="status-card" id="db-status">
+              <h3>Database Status</h3>
+              <div class="status-indicator" id="db-indicator">Checking...</div>
+              <p id="db-details">Loading...</p>
+            </div>
+          </div>
+
+          <div class="stats-section">
+            <h3>System Statistics</h3>
+            <div class="stats-grid" id="stats-grid">Loading statistics...</div>
+          </div>
+
+          <div class="tables-section">
+            <h3>Database Tables</h3>
+            <div id="tables-info">Loading table information...</div>
+          </div>
+
+          <button onclick="refreshSystemStatus()" class="btn-primary">
+            Refresh Status
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="modal-body"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
